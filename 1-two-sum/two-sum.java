@@ -1,55 +1,31 @@
-
-import java.util.*;
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        
-        
-        for(int i =0;i<nums.length-1;i++)
-        {
-            for(int j=i+1;j<nums.length;j++){
-                if(nums[i]+nums[j]==target)
-                {
-                    return new int[]{i, j};
-                    
-                }
-            }
-        }
-        return null;
+       ArrayList<Integer> result= helper(nums,target,nums.length-1,0);
+        int[] obj=new int[2];
+        obj[0]=result.get(0);
+        obj[1]=result.get(1);
+
+       return obj;
+
+
     }
 
-    public static void main(String[] args)
-    {
-        Scanner sc = new Scanner(System.in);
-        int n;
-        int t =sc.nextInt();
-        ArrayList<Integer> num= new ArrayList<>();
-        while(true)
-        {
-          n=sc.nextInt();
-          if(n==-1) break;
-          num.add(n);
-
+    private ArrayList<Integer> helper(int[] nums, int target, int r, int c){
+        ArrayList list =new ArrayList<>();
+        if(r==0){
+            return list;
         }
-        
-        int[] no= new int[num.size()];
-        for(int i=0;i<num.size();i++)
-        {
-            no[i]=num.get(i);
+
+        if(c<r){
+            if(nums[r]+nums[c]==target){
+                list.add(r);
+                list.add(c);
+                return list;
+            }
+            else{
+               return helper(nums,target,r,c+1);
+            }
         }
-        
-        
-
-        
-
-        Solution obj= new Solution();
-
-       int[] result = obj.twoSum(no, t);
-if (result != null) {
-    System.out.println(Arrays.toString(result));
-} else {
-    System.out.println("No pair found");
-}
-
-
+       return helper(nums , target , r-1,0);
     }
 }
