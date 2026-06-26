@@ -1,27 +1,15 @@
 class Solution {
    public static boolean check(int[] nums) {
-        int[] sort=Arrays.copyOf(nums,nums.length);
-        Arrays.sort(sort);
-        
-        boolean issort=true;
-         for(int r=0;r<=nums.length;r++){
-          issort=true;
-          
-            for(int i=0;i<nums.length;i++){
-                if(sort[i]!=nums[(i+r)%nums.length]){
-                    issort=false;
-                   
-                    break;
-                }
+         int peak=0;
+         int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(nums[i]>nums[(i+1)%n]){
+                peak++;
             }
-            if(issort==true){
-                break;
-            }
-        
         }
-        
-        if(issort==true){
+        if(peak<=1){
             return true;
+
         }
         else{
             return false;
