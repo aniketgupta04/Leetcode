@@ -1,16 +1,25 @@
-import java.util.Arrays;
-
 class Solution {
-    public void rotate(int[] nums, int k) {
-        int n = nums.length;
-        if (n == 0) return;
 
-        k %= n;
-
-        int[] temp = Arrays.copyOf(nums, n);
-
-        for (int i = 0; i < n; i++) {
-            nums[(i + k) % n] = temp[i];
+    public void reverse(int[] arr,int i,int n)
+    {
+        if(i>=n){
+            return;
         }
+       int temp=arr[i];
+       arr[i]=arr[n-1];
+       arr[n-1]=temp;
+       
+       reverse(arr,i+1,n-1);
+        
+    }
+    public void rotate(int[] nums, int k) {
+        k%=nums.length;
+
+        reverse(nums,0,nums.length);
+        reverse(nums,0,k);
+        reverse(nums,k,nums.length);
+
+
+        
     }
 }
