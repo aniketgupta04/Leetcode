@@ -1,31 +1,18 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-       ArrayList<Integer> result= helper(nums,target,nums.length-1,0);
-        int[] obj=new int[2];
-        obj[0]=result.get(0);
-        obj[1]=result.get(1);
+        HashMap<Integer, Integer> map = new HashMap<>();
+         int complement=0;
+         int in=0;
+        for(int i=0;i<nums.length;i++){
+        complement = target -nums[i];
 
-       return obj;
-
-
-    }
-
-    private ArrayList<Integer> helper(int[] nums, int target, int r, int c){
-        ArrayList list =new ArrayList<>();
-        if(r==0){
-            return list;
+        if(map.containsKey(complement)){
+            in=i;
+           break;
         }
+        map.put(nums[i],i);
 
-        if(c<r){
-            if(nums[r]+nums[c]==target){
-                list.add(r);
-                list.add(c);
-                return list;
-            }
-            else{
-               return helper(nums,target,r,c+1);
-            }
         }
-       return helper(nums , target , r-1,0);
+         return new int[]{map.get(complement),in};
     }
 }
